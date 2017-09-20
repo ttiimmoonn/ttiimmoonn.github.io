@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+f = open('tp', 'r')
+"""
+    r - открыть файл только для чтения (значение по умолчанию)
+    r+ - открыть файл для чтения и записи
+    w - открыть файл для записи
+        если файл существует, то его содержимое удаляется
+        если файл не существует, то создается новый
+    w+ - открыть файл для чтения и записи
+        если файл существует, то его содержимое удаляется
+        если файл не существует, то создается новый
+    a - открыть файл для дополнения записи. Данные добавляются в конец файла
+    a+ - открыть файл для чтения и записи. Данные добавляются в конец файла
+
+"""
+
+#Считал весь файл
+print(f.read())
+
+#Ставим курсор в начало
+f.seek(0)
+
+#Читаем построчно
+f.readline()
+f.seek(0)
+
+#Читаем через цикл
+for line in f:
+	print (line)
+f.seek(0)
+#Создаем список из строк файла
+text = f.readlines()
+print (text)
+f.seek(0)
+
+#Избавляемся от лишних символов 
+print (f.read().rstrip().split('\n'))
+f.seek(0)
+f.close()
+#------------------------------------------
+#ЗАПИСЬ В ФАЙЛ
+f = open('tg', 'w')
+cfg_lines = ['!', 'no ip domain lookup', '!', 'ip ssh version 2']
+cfg_lines1 = '\n'.join(cfg_lines)
+
+#записать в файл одну строку
+f.write(cfg_lines1)
+f.write('\nTIM r2\n')
+
+
+#записать в файл список строк
+f.writelines(cfg_lines)
+
+cfg_lines2 = []
+#список ктрок с разделителями
+for line in cfg_lines:
+	cfg_lines2.append(line + '\n')
+f.writelines(cfg_lines2)
+
+cfg_lines3 = [a + "\n" for a in cfg_lines]
+f.writelines(cfg_lines3)
+
+#ЗАКРЫТИЕ И ИСКЛ 
+f.close()
+print("Файл закрты: ", f.closed)
+
+try:
+ f = open('r3.txt', 'r')
+except IOError:
+ print('Не такого файла')
+finally:
+ f.close()
+
+#ДРУГОЙ СПОСОБ РАБОТЫ С ФАЙЛАМИ
+with open("tg", 'r') as f:
+#Построчное считывание	
+	for line in f:
+	 print(line.rstrip())
+
+#Два файла
+with open("tg", 'r') as f, open("cop_tg", 'w') as f1:
+	for lin in f:
+	 f1.write(lin)
+

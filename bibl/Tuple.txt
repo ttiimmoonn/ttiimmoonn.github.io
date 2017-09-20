@@ -1,0 +1,8 @@
+#Создание кортежа
+op = ('password',)
+op1 = ('HostName', 'Location', 'IOS',)
+print(op1)
+
+#Обращение к кортежу
+for a in range(len(op1)):
+ print('Объект кортежа op1 № [', a, ']: ', op1[a])
